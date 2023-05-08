@@ -22,17 +22,15 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.button);
 
         button.setOnClickListener((e) -> {
-            i = i+1;
-//            Toast.makeText(MainActivity.this,"content ",Toast.LENGTH_SHORT).show();
-            if (toast == null){
-                toast = Toast.makeText(MainActivity.this,"content ",Toast.LENGTH_SHORT);
-            }else {
-                toast.cancel();
-                toast = Toast.makeText(MainActivity.this,"content ",Toast.LENGTH_SHORT);
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.setText("content" + i);
-            }
-            toast.show();
+            CustomPickerDialog.Builder dialogBuild = new CustomPickerDialog.Builder(this);
+            CustomPickerDialog dialog = dialogBuild.create();
+            dialog.setCallback((year, month, day) -> {
+                Log.d("MainActivity", "year: " + year + ",month: " + month + ",day: " + day);
+            });
+            dialog.setCanceledOnTouchOutside(true);// 点击外部区域关闭
+            dialog.show();
+
         });
+
     }
 }
